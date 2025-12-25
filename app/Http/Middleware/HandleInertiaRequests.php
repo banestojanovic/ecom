@@ -46,6 +46,13 @@ class HandleInertiaRequests extends Middleware
                 'user' => $request->user(),
             ],
             'sidebarOpen' => ! $request->hasCookie('sidebar_state') || $request->cookie('sidebar_state') === 'true',
+            'canRegister' => \Laravel\Fortify\Features::enabled(\Laravel\Fortify\Features::registration()),
+            'cart' => fn() => $request->user() ? $request->user()->cart()->with('items.product')->first() : null,
+            'total' => fn() => $request->user() ? $request->user()->cart()->with('items.product')->first()?->total() : 0,
+            'flash' => fn () => [
+                'success' => session()->get('success'),
+                'error' => session()->get('error'),
+            ],
         ];
     }
 }

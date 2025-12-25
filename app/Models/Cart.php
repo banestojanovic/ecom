@@ -10,6 +10,9 @@ class Cart extends Model
     protected $fillable = [
         'user_id',
         'status',
+        'product_id',
+        'quantity',
+        'price',
     ];
 
     protected $casts = [
@@ -24,5 +27,12 @@ class Cart extends Model
     public function user(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function total(): float
+    {
+        return $this->items->sum(function (CartItem $item) {
+            return $item->quantity * $item->price;
+        });
     }
 }

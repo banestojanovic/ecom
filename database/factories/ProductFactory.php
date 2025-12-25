@@ -17,8 +17,8 @@ class ProductFactory extends Factory {
         return [
             'name'        => fake()->words( 3, true ),
             'description' => fake()->paragraph(),
-            'price'       => fake()->numberBetween( 1000, 100000 ), // price in cents
-            'stock'       => fake()->numberBetween( 0, 100 ),
+            'price'       => fake()->numberBetween( 100, 1000 ),
+            'stock'       => fake()->numberBetween( 2, 20 ),
         ];
     }
 }

@@ -22,11 +22,31 @@ export interface NavItem {
     isActive?: boolean;
 }
 
+export interface CartItem {
+    productId: number;
+    name: string;
+    price: number;
+    quantity: number;
+}
+
+export interface Cart {
+    items: CartItem[];
+    totalQuantity: number;
+    totalPrice: number;
+}
+
 export interface SharedData {
     name: string;
     quote: { message: string; author: string };
     auth: Auth;
     sidebarOpen: boolean;
+    canRegister: boolean;
+    cart: unknown;
+    total: number;
+    flash?: {
+        success: string;
+        error: string;
+    };
     [key: string]: unknown;
 }
 
@@ -40,4 +60,12 @@ export interface User {
     created_at: string;
     updated_at: string;
     [key: string]: unknown; // This allows for additional properties...
+}
+
+export interface Product {
+    id: number;
+    name: string;
+    description: string;
+    price: number;
+    [key: string]: unknown;
 }
