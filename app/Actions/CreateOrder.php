@@ -14,9 +14,9 @@ final class CreateOrder {
 
         DB::transaction( function () use ( $cart ) {
             $order = auth()->user()->orders()->create( [
-                'cart_id'      => $cart->id,
-                'total_amount' => $cart->total(),
-                'status'       => OrderStatus::Created,
+                'cart_id' => $cart->id,
+                'total'   => $cart->total(),
+                'status'  => OrderStatus::Created,
             ] );
 
             $cart->status = CartStatus::Completed;

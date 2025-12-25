@@ -25,6 +25,7 @@ class User extends Authenticatable {
         'total_amount',
         'cart_id',
         'status',
+        'total',
     ];
 
     /**
