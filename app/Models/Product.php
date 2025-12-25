@@ -40,5 +40,13 @@ class Product extends Model
                 $model->slug = $slug;
             }
         });
+
+        static::updated(function ($model) {
+            // low on stock job notification to admin.
+            if ($model->isDirty('stock') && $model->stock < 5) {
+                // Dispatch notification job to admin
+                \App\Jobs\NotifyAdminLowStock::dispatch($model);
+            }
+        });
     }
 }
